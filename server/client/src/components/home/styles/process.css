@@ -1,0 +1,25 @@
+.process-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  padding-bottom: 8em;
+}
+
+.card-image {
+  width: 60%;
+  margin: auto;
+}
+
+.card-title {
+  margin-bottom: 2.5em;
+}
+
+@media (min-width: 1500px) {
+
+  .card-image {
+    width: 40%;
+  }
+
+}

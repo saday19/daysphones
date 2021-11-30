@@ -1,0 +1,35 @@
+.geo {
+  margin: 3em 0;
+}
+
+.location-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2em 0;
+}
+
+.location-header {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.location-info {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.location-frame {
+  width: 700px;
+  height: 700px;
+  max-width: 90%;
+}
+
+@media (max-width: 700px) {
+
+  .location-frame {
+    max-width: 90%;
+    height: 400px;
+  }
+
+}

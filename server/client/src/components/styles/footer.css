@@ -1,0 +1,42 @@
+
+.footer {
+  background-color: #444444;
+  width: 100%;
+  padding-top: 5em;
+}
+
+.content-container {
+  margin: auto;
+  padding: 1em 0;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-list {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  flex: 0 0 33.33333%;
+}
+
+.footer-header {
+  font-size: 1.5em;
+}
+
+.footer-text {
+}
+.clear-text-format {
+  text-decoration: none;
+  color: white;
+}
+.footer-image {
+  max-width: 100px;
+}
+
+@media (max-width: 700px) {
+  .footer-list-small {
+    flex: 0 0 80%;
+    padding: 0 2em;
+    text-align: center;
+  }
+}
