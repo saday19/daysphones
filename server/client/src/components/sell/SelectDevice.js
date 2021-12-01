@@ -33,7 +33,7 @@ const SelectDevice = () => {
           {devices.map((device) =>
             <div key = {device.device} className = 'card'>
             <a className = 'card-link-wrapper' href = '/device-information' onClick = {() => {
-                cookies.set('device', device.device);
+                cookies.set('device', {device: device.device, src: device.image});
               }}>
               <div className = 'card card-shadow' key = {device.device}>
                 <h3>{device.device}</h3>
