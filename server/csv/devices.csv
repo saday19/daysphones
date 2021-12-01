@@ -1,29 +1,29 @@
 category,device,image
-Cell Phone,iPhone 13 Pro Max,/images/devices/13 pro.jpeg
-Cell Phone,iPhone 13 Pro,/images/devices/13 pro.jpeg
-Cell Phone,iPhone 13,/images/devices/iphone 13.jpg
-Cell Phone,iPhone 13 Mini,/images/devices/iphone 13.jpg
-Cell Phone,iPhone 12 Pro Max,/images/devices/iphone 12 pro max.jpg
-Cell Phone,iPhone 12 Pro,/images/devices/iphone 12 pro.jpg
-Cell Phone,iPhone 12,/images/devices/iphone 12.png
-Cell Phone,iPhone 12 Mini,/images/devices/iphone 12 mini.png
-Cell Phone,iPhone 11 Pro Max,/images/devices/iphone 11 pro max.jpg
-Cell Phone,iPhone 11 Pro,/images/devices/iphone 11 pro max.jpg
-Cell Phone,iPhone 11,/images/devices/iphone 11.jpg
-Cell Phone,iPhone SE (2020),/images/devices/iphone se 2020.jpg
-Cell Phone,iPhone Xs Max,/images/devices/iphone xs max.jpg
-Cell Phone,iPhone Xs,/images/devices/iphone xs.jpg
-Cell Phone,iPhone Xr,/images/devices/iphone xr.jpg
-Cell Phone,iPhone X,/images/devices/iphone x.jpeg
-Cell Phone,iPhone 8 Plus,/images/devices/iphone 8 plus.jpg
-Cell Phone,iPhone 8,/images/devices/iphone 8.jpg
-Cell Phone,iPhone 7 Plus,/images/devices/iphone 7 plus.png
-Cell Phone,iPhone 7,/images/devices/iphone 7.jpg
-Smart Watch,Apple Watch Series 6,url
-Smart Watch,Apple Watch Series SE,url
-Smart Watch,Apple Watch Series 5,url
-Smart Watch,Apple Watch Series 4,url
-Smart Watch,Apple Watch Series 3,url
+Cell Phone,iPhone 13 Pro Max,/images/devices/13_pro_max.jpeg
+Cell Phone,iPhone 13 Pro,/images/devices/iphone_13_pro.png
+Cell Phone,iPhone 13,/images/devices/iphone_13.jpg
+Cell Phone,iPhone 13 Mini,/images/devices/iphone_13_mini.png
+Cell Phone,iPhone 12 Pro Max,/images/devices/iphone_12_pro_max.jpg
+Cell Phone,iPhone 12 Pro,/images/devices/iphone_12_pro.jpg
+Cell Phone,iPhone 12,/images/devices/iphone_12.png
+Cell Phone,iPhone 12 Mini,/images/devices/iphone_12_mini.png
+Cell Phone,iPhone 11 Pro Max,/images/devices/iphone_11_pro_max.jpg
+Cell Phone,iPhone 11 Pro,/images/devices/iphone_11_pro.jpg
+Cell Phone,iPhone 11,/images/devices/iphone_11.jpg
+Cell Phone,iPhone SE (2020),/images/devices/iphone_se_2020.jpg
+Cell Phone,iPhone Xs Max,/images/devices/iphone_xs_max.jpg
+Cell Phone,iPhone Xs,/images/devices/iphone_xs.jpg
+Cell Phone,iPhone Xr,/images/devices/iphone_xr.jpg
+Cell Phone,iPhone X,/images/devices/iphone_x.jpeg
+Cell Phone,iPhone 8 Plus,/images/devices/iphone_8_plus.jpg
+Cell Phone,iPhone 8,/images/devices/iphone_8.jpg
+Cell Phone,iPhone 7 Plus,/images/devices/iphone_7_plus.png
+Cell Phone,iPhone 7,/images/devices/iphone_7.jpg
+Smart Watch,Apple Watch Series 6,/images/devices/series_6.png
+Smart Watch,Apple Watch Series SE,/images/devices/series_se.jpg
+Smart Watch,Apple Watch Series 5,/images/devices/series_5.jpg
+Smart Watch,Apple Watch Series 4,/images/devices/series_4.jpg
+Smart Watch,Apple Watch Series 3,/images/devices/series_3.jpg
 Tablet,iPad 9,url
 Tablet,iPad 8,url
 Tablet,iPad 7,url

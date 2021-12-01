@@ -30,7 +30,7 @@ const CategorySelectionContainer = () => {
         {data.map((cat) =>
           <div key = {cat.name} className = 'card card-2 center-text card-container'>
             <a href = {cat.path} onClick = {() => {
-              cookies.set('category',cat.name);
+              cookies.set('category', cat.name);
             }}>
             <div className = 'card card-shadow'>
               <h4 className = 'card-text'>{cat.name}</h4>

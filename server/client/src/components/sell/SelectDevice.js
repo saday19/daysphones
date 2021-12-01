@@ -27,16 +27,23 @@ const SelectDevice = () => {
   return(
     <>
       {devices &&
+        <>
+        <h1 className = 'devices-title'>Select a device to sell</h1>
         <div className = 'devices-container'>
           {devices.map((device) =>
-            <div className = 'card'>
-            <div className = 'card card-shadow' key = {device.device}>
-              <h3>{device.device}</h3>
-              <img className = 'img' src = {device.image}/>
-            </div>
+            <div key = {device.device} className = 'card'>
+            <a className = 'card-link-wrapper' href = '/device-information' onClick = {() => {
+                cookies.set('device', device.device);
+              }}>
+              <div className = 'card card-shadow' key = {device.device}>
+                <h3>{device.device}</h3>
+                <img className = 'img' src = {device.image}/>
+              </div>
+            </a>
             </div>
           )}
         </div>
+        </>
       }
     </>
   );
