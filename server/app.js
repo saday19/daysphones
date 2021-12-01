@@ -1,4 +1,5 @@
 const express = require('express');
+const csv_handler = require('./logic/csv_handler')
 app = express();
 
 app.set('view engine', 'ejs');
@@ -36,46 +37,7 @@ app.use('/api/testimonials/', (req, res) => {
 });
 
 app.use('/api/devices/', (req, res) => {
-  console.log('test');
-  res.json(
-    {
-      "Cell Phone":
-      [
-        {
-          device: "iPhone 13 Pro Max",
-          image: "url"
-        },
-        {
-          device: "iPhone 13 Pro",
-          image: "url"
-        },
-        {
-          device: "iPhone 13",
-          image: "url"
-        },
-        {
-          device: "iPhone 13 Mini",
-          image: "url"
-        },
-        {
-          device: "iPhone 12 Pro Max",
-          image: "url"
-        },
-        {
-          device: "iPhone 12 Pro",
-          image: "url"
-        },
-        {
-          device: "iPhone 12",
-          image: "url"
-        },
-        {
-          device: "iPhone 12 Mini",
-          image: "url"
-        }
-      ]
-    }
-  )
+  csv_handler.read_devices(res);
 });
 
 const PORT  = process.env.PORT || 3001;

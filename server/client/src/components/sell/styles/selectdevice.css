@@ -1,0 +1,17 @@
+.devices-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.device-item {
+  flex: 0 0 33.333333%;
+}
+
+@media (max-width: 700px) {
+  .device-item {
+    flex: 0 0 100%;
+  }
+}

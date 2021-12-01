@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import Cookies from 'universal-cookie';
 
+import './styles/selectdevice.css'
+
 const SelectDevice = () => {
 
   const cookies = new Cookies();
@@ -25,10 +27,13 @@ const SelectDevice = () => {
   return(
     <>
       {devices &&
-        <div>
+        <div className = 'devices-container'>
           {devices.map((device) =>
-            <div key = {device.device}>
-              <p>{device.device}</p>
+            <div className = 'card'>
+            <div className = 'card card-shadow' key = {device.device}>
+              <h3>{device.device}</h3>
+              <img className = 'img' src = {device.image}/>
+            </div>
             </div>
           )}
         </div>
