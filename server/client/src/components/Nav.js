@@ -36,7 +36,7 @@ const Nav = () => {
         </a>
         <a
           className = {isMenuOpen ? 'list-item visible' : 'list-item'}
-          href = '/Home'>
+          href = '/home'>
           Home
         </a>
       </div>
