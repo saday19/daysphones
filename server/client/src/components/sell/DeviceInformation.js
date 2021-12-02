@@ -1,5 +1,6 @@
 import Cookies from 'universal-cookie';
 import DeviceQuestion from './DeviceQuestion.js'
+import GeoLocation from '../home/GeoLocation.js'
 import {useState, useEffect} from 'react';
 import './styles/deviceinformation.css';
 
@@ -58,7 +59,7 @@ const DeviceInformation = () => {
             {condition && <DeviceQuestion question = 'Select a Condition' items = {conditions} todo = {set_condition}/>}
           </div>
         }
-        <div className = 'device-information'>
+        <div className = {offerGenerated ? 'device-information device-information-large' : 'device-information'}>
           <div className = 'di-content card-shadow'>
             <h4 className = 'di-header'>Sell {device.device}</h4>
             <img className = 'device-information-img' src = {device.src} />
@@ -82,9 +83,7 @@ const DeviceInformation = () => {
           </div>
         </div>
       </div>
-      <div className = 'di-location-container'>
-        location-container
-      </div>
+      <GeoLocation displaytitle = {false}/>
     </>
   );
 }

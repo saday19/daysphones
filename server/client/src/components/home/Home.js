@@ -11,7 +11,7 @@ const Home = () => {
       <hr className = 'split' />
       <CategorySelectionContainer />
       <Testimonials />
-      <GeoLocation />
+      <GeoLocation displaytitle = {true}/>
     </>
   );
 }
