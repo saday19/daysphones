@@ -96,6 +96,10 @@
   margin: 1em;
 }
 
+.invisible {
+  display: none;
+}
+
 @media (max-width: 700px) {
   .device-information-form {
     flex: 0 0 90%;

@@ -20,9 +20,30 @@ const DeviceInformation = () => {
 
   const cookies = new Cookies();
   const device = cookies.get('device');
+
   const carriers = ['Unlocked', 'Verizon', 'AT&T', 'T-Mobile'];
   const storages = ['64GB', '128GB', '256GB', '512GB'];
   const conditions = ['Like New', 'Good', 'Fair', 'Minor Damage', 'Heavy Damage'];
+
+  const solidifyOffer = () => {
+
+    const data = {
+      device: device.device,
+      carrier: current_carrier,
+      storage: current_storage,
+      condition: current_condition
+    }
+
+    const cart = cookies.get('cart');
+
+    if(cart) {
+      cart.push(data);
+      cookies.set('cart', cart);
+    } else {
+      cookies.set('cart', [data]);
+    }
+
+  }
 
   const generateOffer = () => {
     setOfferGenerated(true);
@@ -74,7 +95,7 @@ const DeviceInformation = () => {
               <div className = 'di-offer-container'>
                 <h2 className = 'di-offer-header'>Our Offer: <br /><a className = 'di-offer'>${offer}</a><a className = 'di-offer-small'> (each)</a></h2>
                 <a href = '/checkout-device'>
-                  <div className = 'di-sell-now'>
+                  <div className = 'di-sell-now' onClick = { () => {solidifyOffer()}}>
                     <h3>Sell Now</h3>
                   </div>
                 </a>
@@ -83,6 +104,7 @@ const DeviceInformation = () => {
           </div>
         </div>
       </div>
+      <hr className = 'split' />
       <GeoLocation displaytitle = {false}/>
     </>
   );
