@@ -1,0 +1,9 @@
+.not-found-wrapper {
+  width: 100%;
+}
+
+.not-found-text {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  padding: 5em 0 6em 0;
+}

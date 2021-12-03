@@ -1,5 +1,6 @@
 import Cookies from 'universal-cookie';
 import CartItem from './CartItem.js';
+import './styles/cart.css';
 
 const Checkout = () => {
 
@@ -22,12 +23,19 @@ const Checkout = () => {
   return (
     <>
       {cart &&
-        <div>
+        <div className = 'cart-container'>
           {cart.map(data =>
             <CartItem data = {data} todo = {get_offer_for} remove = {remove_item} />
           )}
         </div>
       }
+      <div className = 'cart-sell-another-wrapper'>
+        <a href = '/sell'>
+          <div className = 'di-sell-now cart-center-text'>
+            <h3 className = 'sell-another-text'>Sell Another Device</h3>
+          </div>
+        </a>
+      </div>
     </>
   );
 }

@@ -29,6 +29,7 @@ const DeviceInformation = () => {
 
     const data = {
       device: device.device,
+      src: device.src,
       carrier: current_carrier,
       storage: current_storage,
       condition: current_condition
