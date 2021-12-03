@@ -7,22 +7,46 @@ import NotFound from './components/NotFound.js';
 import SelectDevice from './components/sell/SelectDevice.js';
 import DeviceInformation from './components/sell/DeviceInformation.js';
 import Checkout from './components/sell/Checkout.js';
+import Admin from './components/admin/Admin.js';
 import './app.css';
 
 function App() {
 
   return (
     <Router>
-      <Nav />
       <Switch>
-        <Route path = {'/home'} component = {Home} />
-        <Route path = {'/sell'} component = {Sell} />
-        <Route path = {'/sell-device'} component = {SelectDevice} />
-        <Route path = {'/device-information'} component = {DeviceInformation} />
-        <Route path = {'/checkout-device'} component = {Checkout} />
-        <Route component = {NotFound} />
+        <Route path = {'/home'}>
+          <Nav />
+          <Home />
+          <Footer />
+        </Route>
+        <Route path = {'/sell'}>
+          <Nav />
+          <Sell />
+          <Footer />
+        </Route>
+        <Route path = {'/sell-device'}>
+          <Nav />
+          <SelectDevice />
+          <Footer />
+        </Route>
+        <Route path = {'/device-information'}>
+          <Nav />
+          <DeviceInformation />
+          <Footer />
+        </Route>
+        <Route path = {'/checkout-device'}>
+          <Nav />
+          <Checkout />
+          <Footer />
+        </Route>
+        <Route path = {'/admin'}>
+          <Admin />
+        </Route>
+        <Route>
+          <NotFound />
+        </Route>
       </Switch>
-      <Footer />
     </Router>
   );
 }
