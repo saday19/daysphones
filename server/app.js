@@ -89,8 +89,8 @@ app.post('/api/login', jsonParser, (req, res) => {
 });
 
 app.post('/api/is-logged-in', jsonParser, (req, res) => {
-  token = res.body.token;
-  username = res.body.username;
+  token = req.body.token;
+  username = req.body.username;
   Session.findOne({token: token}, (err, result) => {
     if(result) {
       if(result.username == username) {

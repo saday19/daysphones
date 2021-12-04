@@ -1,0 +1,48 @@
+
+.panel-nav-container {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  width: 100%;
+  background-color: #444444;
+}
+
+.panel-nav {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  max-width: 1100px;
+}
+
+.panel-nav-item {
+  cursor: default;
+  text-align: center;
+  padding: .3em .5em;
+  flex: 0 0 15%;
+  font-size: 1.3em;
+}
+
+.devices-add {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.device-add-input {
+  padding: .2em;
+  margin: .5em .3em;
+}
+
+.device-add-button {
+  background-color: #555555;
+  border-radius: 1em;
+  color: white;
+  padding: .3em 1em;
+  cursor: default;
+}
+
+.panel-header {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}

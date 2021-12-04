@@ -1,12 +1,19 @@
 import {useState} from 'react';
 import axios from 'axios';
 import './styles/admin.css';
+import Cookies from 'universal-cookie';
+import AdminLoginForm from './AdminLoginForm.js';
+import AdminPanel from './AdminPanel.js';
 
 const Admin = () => {
+
+  const [loading, setLoading] = useState(true);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const cookies = new Cookies();
 
   const login_data = {
     username: username,
@@ -18,6 +25,7 @@ const Admin = () => {
     .then((res) => {
       if(res.data.loginSuccess) {
         setLoggedIn(true);
+        cookies.set('login', res.data);
       }
     })
     .catch((err) => {
@@ -25,28 +33,29 @@ const Admin = () => {
     })
   }
 
-  const isLoggedIn = () => {
-
+  const checkLogin = () => {
+    if(!loggedIn && loading) {
+      if(cookies.get('login')) {
+        axios.post('/api/is-logged-in', cookies.get('login'))
+        .then((res) => {
+          if(res.data.loggedIn) {
+            setLoggedIn(true);
+          }
+        }).then(() => {
+          setLoading(false);
+        });
+      } else {
+        setLoading(false);
+      }
+    }
   }
+
+  checkLogin();
 
   return(
     <>
-      {loggedIn && <a>logged in :)</a>}
-      <div onSubmit = {handleLogin} className = 'admin-form-wrapper'>
-        <form className = 'admin-form'>
-          <input className = 'admin-input-field' placeholder = 'Username' type = 'text' onChange = {(event) => {
-            setUsername(event.target.value);
-          }} />
-          <br />
-          <input className = 'admin-input-field' placeholder = 'Password' type = 'password' onChange = {(event) => {
-            setPassword(event.target.value);
-          }} />
-          <br />
-          <div onClick = {() => {
-            handleLogin()
-          }} className = 'admin-submit admin-input-field'>Sign In</div>
-        </form>
-      </div>
+      {!loading && loggedIn && <AdminPanel />}
+      {!loading && !loggedIn && <AdminLoginForm handleLogin = {handleLogin} setUsername = {setUsername} setPassword = {setPassword}/>}
     </>
   );
 

@@ -2,23 +2,25 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DeviceSchema = new Schema({
-  device: {
-    type: String,
-    required: true
-  },
   category: {
     type: String,
     required: true
   },
-  image: {
+  device: {
     type: String,
     required: true
+  },
+  carrier: {
+    type: String
   },
   storage: {
+    type: String
+  },
+  condition: {
     type: String,
     required: true
   },
-  condition: {
+  image: {
     type: String,
     required: true
   },
