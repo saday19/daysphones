@@ -8,6 +8,48 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const token_generator = require('./logic/token_generator');
+const EasyPost = require('@easypost/api');
+const api = new EasyPost('EZTKb3f13c7f7c4f48e89796d47b78b42ffe7zDqNCdFpjYaTgR4XaHefg');
+
+const fromAddress = new api.Address({
+  //company: 'EasyPost',
+  street1: '417 Montgomery Street',
+  street2: '5th Floor',
+  city: 'San Francisco',
+  state: 'CA',
+  zip: '94104',
+  phone: '415-528-7555'
+});
+
+const toAddress = new api.Address({
+  name: 'George Costanza',
+  company: 'Vandelay Industries',
+  street1: '1 E 161st St.',
+  city: 'Bronx',
+  state: 'NY',
+  zip: '10451'
+});
+
+const parcel = new api.Parcel({
+  length: 9,
+  width: 6,
+  height: 2,
+  weight: 10,
+});
+
+const shipment = new api.Shipment({
+  to_address: toAddress,
+  from_address: fromAddress,
+  parcel: parcel
+});
+
+shipment.save().then(s =>
+  s.buy(shipment.lowestRate(['USPS'], ['First']))
+    .then(res => {
+      console.log(shipment.postage_label.label_url);
+    })
+);
+
 
 const sessions = {};
 
