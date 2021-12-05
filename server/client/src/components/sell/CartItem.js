@@ -1,12 +1,27 @@
 import {useState} from 'react';
+import axios from 'axios';
 
 const CartItem = (props) => {
 
   const [isVisible, setVisible] = useState(true);
 
+  const [offer, setOffer] = useState('0');
+
   const data = props.data;
   const get_offer_for = props.todo;
   const remove = props.remove;
+
+  const generateOffer = (condition) => {
+    if(offer != 0) return;
+    data.condition = condition;
+    data.image = data.src;
+    axios.post('/api/generate-offer', {data: data})
+    .then(res => {
+      setOffer(res.data.price);
+    });
+  }
+
+  generateOffer(data.condition);
 
   return(
     <>
@@ -17,7 +32,7 @@ const CartItem = (props) => {
           <p>Carrier: {data.carrier}</p>
           <p>Storage: {data.storage}</p>
           <p>Condition: {data.condition}</p>
-          <p>Price: <a className = 'di-offer'>${get_offer_for(data)}</a> (each)</p>
+          <p>Price: <a className = 'di-offer'>{offer == 0 ? 'Loading...' : '$' + offer}</a> (each)</p>
           <div className = 'di-sell-now cart-center-text' onClick = { () => {
             remove(data);
             setVisible(false);

@@ -2,15 +2,15 @@ import Cookies from 'universal-cookie';
 import DeviceQuestion from './DeviceQuestion.js'
 import GeoLocation from '../home/GeoLocation.js'
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 import './styles/deviceinformation.css';
 
 const DeviceInformation = () => {
 
-  const offer = 500;
-
+  const [offer, setOffer] = useState(0);
   const [offerGenerated, setOfferGenerated] = useState(false);
 
-  const [carrier, setCarrier] = useState(true);
+  const [carrier, setCarrier] = useState(false);
   const [storage, setStorage] = useState(false);
   const [condition, setCondition] = useState(false);
 
@@ -18,22 +18,57 @@ const DeviceInformation = () => {
   const [current_carrier, setCurrentCarrier] = useState('');
   const [current_condition, setCurrentCondition] = useState('');
 
+  const [loading, setLoading] = useState(true);
+  const [doneLoading, setDoneLoading] = useState(false);
+
   const cookies = new Cookies();
   const device = cookies.get('device');
 
-  const carriers = ['Unlocked', 'Verizon', 'AT&T', 'T-Mobile'];
-  const storages = ['64GB', '128GB', '256GB', '512GB'];
-  const conditions = ['Like New', 'Good', 'Fair', 'Minor Damage', 'Heavy Damage'];
+  const [carriers, setCarriers] = useState([]);
+  const [storages, setStorages] = useState([]);
+  const [conditions, setConditions] = useState([]);
+
+  const data = {
+    device: device.device,
+    src: device.src,
+    carrier: current_carrier,
+    storage: current_storage,
+    condition: current_condition
+  }
+
+  const fetchDeviceVariations = () => {
+    if(!loading) return;
+    setLoading(false);
+    axios.post('/api/get-device-variations', {device: device})
+    .then((res) => {
+      if(res.data) {
+        setCarriers(res.data.carriers);
+        if(res.data.carriers[0] == '') {
+          setStorage(true);
+          if(res.data.storages[0] == '') {
+            setStorage(false);
+            setCondition(true);
+          }
+        } else {
+          setCarrier(true);
+        }
+        setStorages(res.data.storages);
+        if(res.data.storages[0] == '') {
+          setCondition(true);
+          if(res.data.carriers[0] != '') {
+            setCondition(false);
+          }
+        }
+        setConditions(res.data.conditions);
+        setDoneLoading(true);
+      } else {
+        console.log('bad response');
+        setLoading(true);
+      }
+    });
+  }
 
   const solidifyOffer = () => {
-
-    const data = {
-      device: device.device,
-      src: device.src,
-      carrier: current_carrier,
-      storage: current_storage,
-      condition: current_condition
-    }
 
     const cart = cookies.get('cart');
 
@@ -46,13 +81,22 @@ const DeviceInformation = () => {
 
   }
 
-  const generateOffer = () => {
-    setOfferGenerated(true);
+  const generateOffer = (condition) => {
+    data.condition = condition;
+    data.image = data.src;
+    axios.post('/api/generate-offer', {data: data})
+    .then(res => {
+      setOffer(res.data.price);
+      setOfferGenerated(true);
+    });
   }
 
   const set_carrier = (carrier) => {
     setCarrier(false);
-    setStorage(true)
+    if(storages[0] == '') {
+      setCondition(true);
+    } else
+    setStorage(true);
     setCurrentCarrier(carrier);
   }
 
@@ -65,8 +109,15 @@ const DeviceInformation = () => {
   const set_condition = (condition) => {
     setCondition(false);
     setCurrentCondition(condition);
-    generateOffer();
+    generateOffer(condition);
   }
+
+  fetchDeviceVariations();
+
+  if(!doneLoading)
+    return (
+      <></>
+    );
 
   return(
     <>
@@ -74,7 +125,7 @@ const DeviceInformation = () => {
         {!offerGenerated && <h1>Answer a few questions to get an instant quote</h1>}
       </div>
       <div className = 'device-information-container'>
-        {!offerGenerated &&
+        {!offerGenerated && doneLoading &&
           <div className = 'device-information-form'>
             {carrier && <DeviceQuestion question = 'Select a Carrier' items = {carriers} todo = {set_carrier}/>}
             {storage && <DeviceQuestion question = 'Select a Storage' items = {storages} todo = {set_storage}/>}

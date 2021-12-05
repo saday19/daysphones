@@ -1,6 +1,5 @@
 
 const DeviceQuestion = (props) => {
-
   return (
     <>
     <div className = 'di-input-header'>

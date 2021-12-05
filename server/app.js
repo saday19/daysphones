@@ -58,7 +58,23 @@ app.use('/api/categories/', (req, res) => {
 app.use('/api/testimonials/', (req, res) => {res.json([{name: "Andrew G.",text: "\"Excellent company. I’ve sold several devices to them. Service is always  prompt, exchange is always easy. I can always sell my phone the same day that I inquired and know I’ll get a fair price.\""}])});
 
 app.use('/api/devices/', (req, res) => {
-  csv_handler.read_devices(res);
+  Device.find({}, (err, docs) => {
+    let data = {};
+    docs.forEach(device => {
+      if(!data[device.category]) {
+        data[device.category] = [];
+      }
+      if(!(data[device.category].length > 0)) {
+        if(device.enable) {
+          data[device.category].push({
+            device: device.device,
+            image: device.image
+          });
+        }
+      }
+    });
+    res.json(data);
+  })
 });
 
 app.post('/api/login', jsonParser, (req, res) => {
@@ -101,6 +117,71 @@ app.post('/api/is-logged-in', jsonParser, (req, res) => {
 });
 
 app.post('/api/add-device/', jsonParser, (req, res) => {
-  console.log("request for add device " + req.body.data);
-  res.send(req.body.data);
+  let data = req.body.data;
+  let new_device = new Device();
+  new_device.category = data.category;
+  new_device.device = data.device;
+  new_device.carrier = data.carrier;
+  new_device.storage = data.storage;
+  new_device.condition = data.condition;
+  new_device.price = data.price;
+  new_device.image = data.image;
+  new_device.save();
+  res.send({message: "addition successful"});
+});
+
+app.post('/api/update-device', jsonParser, (req,res) => {
+  Device.findByIdAndUpdate(req.body._id, req.body, (err, result) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  })
+});
+
+app.post('/api/get-device-variations', jsonParser, (req, res) => {
+  Device.find({device: req.body.device.device}, (err, doc) => {
+    const carriers = [];
+    const storages = [];
+    const conditions = [];
+    for(const device of doc) {
+      if(device.enable) {
+        if(!carriers.includes(device.carrier)) {
+          carriers.push(device.carrier);
+        }
+        if(!storages.includes(device.storage)) {
+          storages.push(device.storage);
+        }
+        if(!conditions.includes(device.condition)) {
+          conditions.push(device.condition);
+        }
+      }
+    }
+    res.send({
+      carriers: carriers,
+      storages: storages,
+      conditions: conditions
+    });
+  });
+});
+
+app.post('/api/generate-offer', jsonParser, (req, res) => {
+  if(req.body.data) {
+    Device.findOne({
+      device: req.body.data.device,
+      condition: req.body.data.condition,
+      carrier: req.body.data.carrier,
+      storage: req.body.data.storage
+      }, (err, doc) => {
+        if(err) console.log(err);
+        else res.send(doc);
+      });
+  }
+});
+
+app.get('/api/get-all-devices', jsonParser, (req, res) => {
+  Device.find({}, (err, doc) => {
+    res.json(doc);
+  });
 });

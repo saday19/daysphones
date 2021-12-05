@@ -19,7 +19,6 @@
   text-align: center;
   padding: .3em .5em;
   flex: 0 0 15%;
-  font-size: 1.3em;
 }
 
 .devices-add {
@@ -32,6 +31,10 @@
 .device-add-input {
   padding: .2em;
   margin: .5em .3em;
+}
+
+.device-add-input-size {
+  width: 7em;
 }
 
 .device-add-button {
