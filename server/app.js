@@ -11,47 +11,20 @@ const token_generator = require('./logic/token_generator');
 const EasyPost = require('@easypost/api');
 const api = new EasyPost('EZTKb3f13c7f7c4f48e89796d47b78b42ffe7zDqNCdFpjYaTgR4XaHefg');
 
-const fromAddress = new api.Address({
-  //company: 'EasyPost',
-  street1: '417 Montgomery Street',
-  street2: '5th Floor',
-  city: 'San Francisco',
-  state: 'CA',
-  zip: '94104',
-  phone: '415-528-7555'
+const parcel = new api.Parcel({
+  length: 7,
+  width: 5,
+  height: 2,
+  weight: 8,
 });
 
 const toAddress = new api.Address({
-  name: 'George Costanza',
-  company: 'Vandelay Industries',
-  street1: '1 E 161st St.',
-  city: 'Bronx',
-  state: 'NY',
-  zip: '10451'
+  company: 'DaysPhones',
+  street1: '1421 North Main st.',
+  city: 'Liberty',
+  state: 'TX',
+  zip: '77575'
 });
-
-const parcel = new api.Parcel({
-  length: 9,
-  width: 6,
-  height: 2,
-  weight: 10,
-});
-
-const shipment = new api.Shipment({
-  to_address: toAddress,
-  from_address: fromAddress,
-  parcel: parcel
-});
-
-shipment.save().then(s =>
-  s.buy(shipment.lowestRate(['USPS'], ['First']))
-    .then(res => {
-      console.log(shipment.postage_label.label_url);
-    })
-);
-
-
-const sessions = {};
 
 app = express();
 
@@ -226,4 +199,37 @@ app.get('/api/get-all-devices', jsonParser, (req, res) => {
   Device.find({}, (err, doc) => {
     res.json(doc);
   });
+});
+
+app.post('/api/create-order', jsonParser, (req, res) => {
+  const data = req.body.data;
+  if(data.shipping == 'fast') {
+
+    const fromAddress = new api.Address({
+      name: data.first + " " + data.last,
+      street1: data.address1,
+      street2: data.address2,
+      city: data.city,
+      state: data.state,
+      zip: data.zip,
+      phone: data.phone
+    });
+
+    const shipment = new api.Shipment({
+      to_address: toAddress,
+      from_address: fromAddress,
+      parcel: parcel
+    });
+
+    shipment.save().then(s =>
+      s.buy(shipment.lowestRate(['USPS'], ['First']))
+        .then(res => {
+          console.log(data.first + " " + data.last);
+          console.log(shipment.postage_label.label_url);
+        })
+    );
+
+  }
+  //need cart to be sent from front end
+  //save customer and order data
 });
